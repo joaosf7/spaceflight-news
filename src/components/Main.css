@@ -1,0 +1,53 @@
+#card-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 80vw;
+    overflow-y: scroll;
+    margin-bottom: 20px;
+    max-height: 60vh;
+}
+
+#news-title {
+    color:brown;
+}
+
+#main-frame {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.arrow-image {
+    max-width: 40px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.arrow-image:hover {
+    cursor: pointer;
+}
+
+#input-box {
+    border-radius: 50%;
+    border-width: 0;
+    border: 0px;
+    height: 30px;
+    font-size: larger;
+    color: #161336;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+#input-box:focus {
+    outline: none;
+}
+
+.up-down-arrow {
+    height: 50px;
+}
+
+.up-down-arrow:hover {
+    cursor: pointer;
+}

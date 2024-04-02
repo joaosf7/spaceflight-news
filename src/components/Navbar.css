@@ -1,0 +1,15 @@
+.navbar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 50vw;
+}
+
+#navbar-logo{
+    max-height: 100px;
+}
+
+#darkmode-switch{
+    margin-left: 20px;
+    max-height: 50px;
+}

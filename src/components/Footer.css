@@ -1,0 +1,9 @@
+footer{
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+}
+
+.social-media-image{
+    max-height: 70px;
+}
