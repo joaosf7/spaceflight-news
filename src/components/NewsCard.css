@@ -1,8 +1,8 @@
 #news-card {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-around;
+    align-items:center;
     max-width: 30vw;
     margin-bottom: 20px;
 }
@@ -18,7 +18,7 @@
 }
 
 .news-card-title {
-    height: 40px;
+    height:fit-content;
 }
 
 .news-card-release {

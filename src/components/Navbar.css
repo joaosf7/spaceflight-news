@@ -3,6 +3,7 @@
     justify-content: space-around;
     align-items: center;
     max-width: 50vw;
+    flex-wrap: nowrap;
 }
 
 #navbar-logo{
@@ -17,4 +18,27 @@
 .order-filter-box {
     display: flex;
     
+}
+
+.link-box {
+    text-decoration: none;
+    color: inherit;
+    font-family: inherit; 
+}
+
+.navbar-links {
+    display: flex;
+}
+
+.navbar-link {
+    margin-right: 30px;
+    outline: inherit;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    background-color: #4083C130;
+    padding: 3px;
+    width: 100px;
+    border-radius: 20%;
+    color: #C70130;
 }
