@@ -1,38 +1,38 @@
 import { useState, useEffect } from "react"
-import BlogView from './BlogView'
-import BlogCard from './BlogCard'
+import NewsCard from './NewsCard.js'
+import ArticleView from './ArticleView.js'
+import './News.css'
 import loadingImage from '../assets/images/loading.gif'
 import leftArrow from '../assets/images/leftArrow.png'
 import rightArrow from '../assets/images/rightArrow.png'
 import upArrow from '../assets/images/upArrow.png'
 import downArrow from '../assets/images/downArrow.png'
-import './Blog.css'
 
-function Blog(){
-    const SAMPLE_INPUT = 'Search blogs...'
-    const [blogs, setBlogs] = useState([])
+function News() {
+    const SAMPLE_INPUT = 'Search articles...'
+    const [articles, setArticles] = useState([])
     const [searchTerm, setSearchTerm] = useState(SAMPLE_INPUT)
-    const [selectedBlog, setSelectedBlog] = useState()
+    const [selectedArticle, setSelectedArticle] = useState()
 
-    function fetchBlog(url){
+    function fetchArticle(url){
         fetch(url)
             .then(res => res.json())
-            .then(data => setBlogs(data))
-            .catch(error => console.error('Error fetching blog: ' + error))
+            .then(data => setArticles(data))
+            .catch(error => console.error('Error fetching article: ' + error))
     }
 
     useEffect(() => {
-        if(blogs.length === 0){
-            fetchBlog("https://api.spaceflightnewsapi.net/v4/blogs")
+        if(articles.length === 0){
+            fetchArticle("https://api.spaceflightnewsapi.net/v4/articles")
         }
     },[])
 
-    const getNextBlogList = () => {
-        fetchBlog(blogs.next)
+    const getNextArticleList = () => {
+        fetchArticle(articles.next)
     }
 
-    const getPreviousBlogList = () => {
-        fetchBlog(blogs.previous)
+    const getPreviousArticleList = () => {
+        fetchArticle(articles.previous)
     }
 
     const handleSearchInput = (event) => {
@@ -41,34 +41,34 @@ function Blog(){
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        fetchBlog("https://api.spaceflightnewsapi.net/v4/blogs?search=" + searchTerm)
+        fetchArticle("https://api.spaceflightnewsapi.net/v4/articles?search=" + searchTerm)
     }
 
     const sortByRecent = () => {
-        fetchBlog("https://api.spaceflightnewsapi.net/v4/blogs" + (searchTerm !== SAMPLE_INPUT ? "?search=" + searchTerm : ''))
+        fetchArticle("https://api.spaceflightnewsapi.net/v4/articles" + (searchTerm !== SAMPLE_INPUT ? "?search=" + searchTerm : ''))
     }
 
     const sortByOlder = () => {
-        fetchBlog("https://api.spaceflightnewsapi.net/v4/blogs" + '?ordering=published_at' + (searchTerm && searchTerm !== SAMPLE_INPUT ? "&search=" + searchTerm : ''))
+        fetchArticle("https://api.spaceflightnewsapi.net/v4/articles" + '?ordering=published_at' + (searchTerm && searchTerm !== SAMPLE_INPUT ? "&search=" + searchTerm : ''))
     }
 
-    const handleSelectedBlog = (id) => {
-        fetch("https://api.spaceflightnewsapi.net/v4/blogs/" + id)
+    const handleSelectedArticle = (id) => {
+        fetch("https://api.spaceflightnewsapi.net/v4/articles/" + id)
             .then(res => res.json())
             .then(data => {
                 window.scrollTo({
                     top: 0,
                     behavior: 'smooth'
                 });
-                setSelectedBlog(data)
+                setSelectedArticle(data)
             })
             .catch(error => console.error(error))
     }
 
     return(
         <div id='main'>
-            {selectedBlog && <BlogView blog={selectedBlog} />}
-            <h1 id="blog-title">Spiciest Blogs!</h1>
+            {selectedArticle && <ArticleView article={selectedArticle} />}
+            <h1 id="news-title">Latest Spaceflight news</h1>
             <form
                 onSubmit={handleSubmit}>
                 <input
@@ -87,32 +87,31 @@ function Blog(){
                 />
             </div>
             <div id='main-frame'>
-            {blogs.previous ? 
+            {articles.previous ? 
                 <img className='arrow-image' src={leftArrow} alt="left arrow" 
-                    onClick={getPreviousBlogList}/>
+                    onClick={getPreviousArticleList}/>
                 :
                 ''
             }
                 <div id="card-list">
-                    {blogs.length === 0 ?
+                    {articles.length === 0 ?
                             <img src={loadingImage} alt="loading image" />
                         :
-                            blogs.results.map(blog => (
-                                <BlogCard key={blog.id} blog={blog} toogleSelectedBlog={handleSelectedBlog} />
+                            articles.results.map(article => (
+                                <NewsCard key={article.id} article={article} toogleSelectedArticle={handleSelectedArticle} />
                         ))
                     }
                 </div>
-                {blogs.next ?
+                {articles.next ?
                     <img className='arrow-image' src={rightArrow} alt="right arrow" 
-                        onClick={getNextBlogList}
+                        onClick={getNextArticleList}
                     />
                     :
                     ''
                 }
             </div>
         </div>
-
     )
 }
 
-export default Blog
+export default News

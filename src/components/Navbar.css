@@ -1,9 +1,12 @@
 .navbar{
+    margin: 0;
+    padding: 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     max-width: 50vw;
     flex-wrap: nowrap;
+    margin-bottom: 10px;
 }
 
 #navbar-logo{
@@ -13,6 +16,10 @@
 #darkmode-switch{
     margin-left: 20px;
     max-height: 50px;
+}
+
+#darkmode-switch:hover {
+    cursor: pointer;
 }
 
 .order-filter-box {
@@ -28,6 +35,7 @@
 
 .navbar-links {
     display: flex;
+    margin-bottom: 10px;
 }
 
 .navbar-link {
@@ -36,9 +44,14 @@
     text-decoration: none;
     color: inherit;
     cursor: pointer;
-    background-color: #4083C130;
+    background-color: #346beb30;
     padding: 3px;
     width: 100px;
     border-radius: 20%;
+    color: #282108;
+}
+
+.darkmode .navbar-link {
+    background-color: #4083C130;
     color: #C70130;
 }

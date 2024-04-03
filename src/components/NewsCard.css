@@ -5,6 +5,7 @@
     align-items:center;
     max-width: 30vw;
     margin-bottom: 20px;
+    max-height: 35vh;
 }
 
 #news-card:hover {
@@ -14,11 +15,14 @@
 #news-card-image {
     margin-top: 10px;
     max-width:30vw;
-    max-height: 25vh;
+    max-height: 19vh;
 }
 
 .news-card-title {
-    height:fit-content;
+    margin-top: 10px;
+    height:max-content;
+    font-size:large;
+    overflow: hidden;
 }
 
 .news-card-release {

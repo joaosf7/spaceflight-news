@@ -1,38 +1,38 @@
 import { useState, useEffect } from "react"
-import NewsCard from './NewsCard.js'
-import ArticleView from './ArticleView.js'
-import './Main.css'
+import ReportView from './ReportView'
+import ReportCard from './ReportCard'
 import loadingImage from '../assets/images/loading.gif'
 import leftArrow from '../assets/images/leftArrow.png'
 import rightArrow from '../assets/images/rightArrow.png'
 import upArrow from '../assets/images/upArrow.png'
 import downArrow from '../assets/images/downArrow.png'
+import './Report.css'
 
-function Main() {
-    const SAMPLE_INPUT = 'Search articles...'
-    const [articles, setArticles] = useState([])
+function Report(){
+    const SAMPLE_INPUT = 'Search reports...'
+    const [reports, setReports] = useState([])
     const [searchTerm, setSearchTerm] = useState(SAMPLE_INPUT)
-    const [selectedArticle, setSelectedArticle] = useState()
+    const [selectedReport, setSelectedReport] = useState()
 
-    function fetchArticle(url){
+    function fetchReport(url){
         fetch(url)
             .then(res => res.json())
-            .then(data => setArticles(data))
-            .catch(error => console.error('Error fetching article: ' + error))
+            .then(data => setReports(data))
+            .catch(error => console.error('Error fetching report: ' + error))
     }
 
     useEffect(() => {
-        if(articles.length === 0){
-            fetchArticle("https://api.spaceflightnewsapi.net/v4/articles")
+        if(reports.length === 0){
+            fetchReport("https://api.spaceflightnewsapi.net/v4/reports")
         }
     },[])
 
-    const getNextArticleList = () => {
-        fetchArticle(articles.next)
+    const getNextReportList = () => {
+        fetchReport(reports.next)
     }
 
-    const getPreviousArticleList = () => {
-        fetchArticle(articles.previous)
+    const getPreviousReportList = () => {
+        fetchReport(reports.previous)
     }
 
     const handleSearchInput = (event) => {
@@ -41,28 +41,34 @@ function Main() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        fetchArticle("https://api.spaceflightnewsapi.net/v4/articles?search=" + searchTerm)
+        fetchReport("https://api.spaceflightnewsapi.net/v4/reports?search=" + searchTerm)
     }
 
     const sortByRecent = () => {
-        fetchArticle("https://api.spaceflightnewsapi.net/v4/articles" + (searchTerm !== SAMPLE_INPUT ? "?search=" + searchTerm : ''))
+        fetchReport("https://api.spaceflightnewsapi.net/v4/reports" + (searchTerm !== SAMPLE_INPUT ? "?search=" + searchTerm : ''))
     }
 
     const sortByOlder = () => {
-        fetchArticle("https://api.spaceflightnewsapi.net/v4/articles" + '?ordering=published_at' + (searchTerm && searchTerm !== SAMPLE_INPUT ? "&search=" + searchTerm : ''))
+        fetchReport("https://api.spaceflightnewsapi.net/v4/reports" + '?ordering=published_at' + (searchTerm && searchTerm !== SAMPLE_INPUT ? "&search=" + searchTerm : ''))
     }
 
-    const handleSelectedArticle = (id) => {
-        fetch("https://api.spaceflightnewsapi.net/v4/articles/" + id)
+    const handleSelectedReport = (id) => {
+        fetch("https://api.spaceflightnewsapi.net/v4/reports/" + id)
             .then(res => res.json())
-            .then(data => setSelectedArticle(data))
+            .then(data => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                setSelectedReport(data)
+            })
             .catch(error => console.error(error))
     }
 
     return(
         <div id='main'>
-            {selectedArticle && <ArticleView article={selectedArticle} />}
-            <h1 id="news-title">Latest Spaceflight news</h1>
+            {selectedReport && <ReportView report={selectedReport} />}
+            <h1 id="report-title">Daily Reports</h1>
             <form
                 onSubmit={handleSubmit}>
                 <input
@@ -81,31 +87,32 @@ function Main() {
                 />
             </div>
             <div id='main-frame'>
-            {articles.previous ? 
+            {reports.previous ? 
                 <img className='arrow-image' src={leftArrow} alt="left arrow" 
-                    onClick={getPreviousArticleList}/>
+                    onClick={getPreviousReportList}/>
                 :
                 ''
             }
                 <div id="card-list">
-                    {articles.length === 0 ?
+                    {reports.length === 0 ?
                             <img src={loadingImage} alt="loading image" />
                         :
-                            articles.results.map(article => (
-                                <NewsCard key={article.id} article={article} toogleSelectedArticle={handleSelectedArticle} />
+                            reports.results.map(report => (
+                                <ReportCard key={report.id} report={report} toogleSelectedReport={handleSelectedReport} />
                         ))
                     }
                 </div>
-                {articles.next ?
+                {reports.next ?
                     <img className='arrow-image' src={rightArrow} alt="right arrow" 
-                        onClick={getNextArticleList}
+                        onClick={getNextReportList}
                     />
                     :
                     ''
                 }
             </div>
         </div>
+
     )
 }
 
-export default Main
+export default Report

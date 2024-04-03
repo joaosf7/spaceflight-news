@@ -19,8 +19,9 @@ function Navbar(props) {
           />
         </div>
           <div className="navbar-links">
-            <Link className="navbar-link" to="/articles">Articles</Link>
+            <Link className="navbar-link" to="/news">Articles</Link>
             <Link to='/blogs' className='navbar-link'>Blogs</Link>
+            <Link to='/reports' className='navbar-link'>Reports</Link>
           </div>
       </header>
     );
