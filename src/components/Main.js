@@ -18,7 +18,7 @@ function Main() {
         fetch(url)
             .then(res => res.json())
             .then(data => setArticles(data))
-            .catch(error => console.error(error))
+            .catch(error => console.error('Error fetching article: ' + error))
     }
 
     useEffect(() => {
@@ -45,7 +45,7 @@ function Main() {
     }
 
     const sortByRecent = () => {
-        fetchArticle("https://api.spaceflightnewsapi.net/v4/articles" + (searchTerm && searchTerm !== SAMPLE_INPUT ? "?search=" + searchTerm : ''))
+        fetchArticle("https://api.spaceflightnewsapi.net/v4/articles" + (searchTerm !== SAMPLE_INPUT ? "?search=" + searchTerm : ''))
     }
 
     const sortByOlder = () => {
