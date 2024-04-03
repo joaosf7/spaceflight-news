@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import NewsCard from './NewsCard.js'
+import ArticleView from './ArticleView.js'
 import './Main.css'
 import loadingImage from '../assets/images/loading.gif'
 import leftArrow from '../assets/images/leftArrow.png'
@@ -8,33 +9,30 @@ import upArrow from '../assets/images/upArrow.png'
 import downArrow from '../assets/images/downArrow.png'
 
 function Main() {
-    const SAMPLE_INPUT = 'Search news article...'
+    const SAMPLE_INPUT = 'Search articles...'
     const [articles, setArticles] = useState([])
-    const [error, setError] = useState()
     const [searchTerm, setSearchTerm] = useState(SAMPLE_INPUT)
-    const [count, setCount] = useState(0)
+    const [selectedArticle, setSelectedArticle] = useState()
+
+    function fetchArticle(url){
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setArticles(data))
+            .catch(error => console.error(error))
+    }
 
     useEffect(() => {
-        setCount(count+1)
-        if(articles.length === 0)
-            fetch("https://api.spaceflightnewsapi.net/v4/articles")
-                .then(res => res.json())
-                .then(data => setArticles(data))
-                .catch(error => setError(error))
+        if(articles.length === 0){
+            fetchArticle("https://api.spaceflightnewsapi.net/v4/articles")
+        }
     },[])
 
     const getNextArticleList = () => {
-        fetch(articles.next)
-            .then(res => res.json())
-            .then(data => setArticles(data))
-            .catch(error => setError(error))
+        fetchArticle(articles.next)
     }
 
     const getPreviousArticleList = () => {
-        fetch(articles.previous)
-            .then(res => res.json())
-            .then(data => setArticles(data))
-            .catch(error => setError(error))
+        fetchArticle(articles.previous)
     }
 
     const handleSearchInput = (event) => {
@@ -43,28 +41,27 @@ function Main() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        fetch("https://api.spaceflightnewsapi.net/v4/articles?search=" + searchTerm)
-            .then(res => res.json())
-            .then(data => setArticles(data))
-            .catch(error => setError(error))
+        fetchArticle("https://api.spaceflightnewsapi.net/v4/articles?search=" + searchTerm)
     }
 
     const sortByRecent = () => {
-        fetch("https://api.spaceflightnewsapi.net/v4/articles" + (searchTerm && searchTerm !== SAMPLE_INPUT ? "?search=" + searchTerm : ''))
-            .then(res => res.json())
-            .then(data => setArticles(data))
-            .catch(error => setError(error))
+        fetchArticle("https://api.spaceflightnewsapi.net/v4/articles" + (searchTerm && searchTerm !== SAMPLE_INPUT ? "?search=" + searchTerm : ''))
     }
 
     const sortByOlder = () => {
-        fetch("https://api.spaceflightnewsapi.net/v4/articles" + '?ordering=published_at' + (searchTerm && searchTerm !== SAMPLE_INPUT ? "&search=" + searchTerm : ''))
+        fetchArticle("https://api.spaceflightnewsapi.net/v4/articles" + '?ordering=published_at' + (searchTerm && searchTerm !== SAMPLE_INPUT ? "&search=" + searchTerm : ''))
+    }
+
+    const handleSelectedArticle = (id) => {
+        fetch("https://api.spaceflightnewsapi.net/v4/articles/" + id)
             .then(res => res.json())
-            .then(data => setArticles(data))
-            .catch(error => setError(error))
+            .then(data => setSelectedArticle(data))
+            .catch(error => console.error(error))
     }
 
     return(
         <div id='main'>
+            {selectedArticle && <ArticleView article={selectedArticle} />}
             <h1 id="news-title">Latest Spaceflight news</h1>
             <form
                 onSubmit={handleSubmit}>
@@ -75,12 +72,14 @@ function Main() {
                     onClick={() => setSearchTerm('')}
                 />
             </form>
-            <img className="up-down-arrow" src={upArrow} alt='up arrow'
-                onClick={sortByRecent}
-            />
-            <img className="up-down-arrow" src={downArrow} alt='down arrow'
-                onClick={sortByOlder}
-            />
+            <div className="order-filter-box">
+                <img className="up-down-arrow" src={upArrow} alt='up arrow'
+                    onClick={sortByRecent}
+                />
+                <img className="up-down-arrow" src={downArrow} alt='down arrow'
+                    onClick={sortByOlder}
+                />
+            </div>
             <div id='main-frame'>
             {articles.previous ? 
                 <img className='arrow-image' src={leftArrow} alt="left arrow" 
@@ -93,7 +92,7 @@ function Main() {
                             <img src={loadingImage} alt="loading image" />
                         :
                             articles.results.map(article => (
-                                <NewsCard key={article.id} article={article} />
+                                <NewsCard key={article.id} article={article} toogleSelectedArticle={handleSelectedArticle} />
                         ))
                     }
                 </div>

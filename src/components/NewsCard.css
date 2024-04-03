@@ -7,6 +7,10 @@
     margin-bottom: 20px;
 }
 
+#news-card:hover {
+    cursor: pointer;
+}
+
 #news-card-image {
     margin-top: 10px;
     max-width:30vw;
