@@ -4,7 +4,7 @@ import Footer from './components/Footer'
 import News from './components/News'
 import Blog from './components/Blog'
 import Report from './components/Report'
-import Error from './Error'
+import ErrorPage from './ErrorPage'
 import { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
@@ -22,10 +22,11 @@ function App() {
       <div className={darkmode ? 'App' : 'App darkmode'}>
         <Navbar toogleDarkmode={handleDarkmode}/>
         <Routes>
-          <Route exact path='/' element={<News /> } errorElement={<Error />}/>
+          <Route exact path='/' element={<News /> } errorElement={<ErrorPage />}/>
           <Route path='/news' element={<News />} />
           <Route path='/blogs' element={<Blog />} />
           <Route path='/reports' element={<Report />} />
+          <Route path='/*' element={<ErrorPage />} />
         </Routes>
         <Footer />
       </div>

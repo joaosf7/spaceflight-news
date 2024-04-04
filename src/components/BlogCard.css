@@ -1,14 +1,15 @@
 #blog-card {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items:center;
-    max-width: 30vw;
+    max-width: 48%;
     margin-bottom: 20px;
 }
 
 #blog-card:hover {
     cursor: pointer;
+    background-color: #70707050;
 }
 
 #blog-card-image {

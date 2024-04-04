@@ -1,0 +1,7 @@
+.link{
+    outline: inherit;
+    text-decoration: none;
+    color: blue;
+    cursor: pointer;
+    padding: 20px;
+}

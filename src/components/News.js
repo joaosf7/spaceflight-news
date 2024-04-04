@@ -13,6 +13,11 @@ function News() {
     const [articles, setArticles] = useState([])
     const [searchTerm, setSearchTerm] = useState(SAMPLE_INPUT)
     const [selectedArticle, setSelectedArticle] = useState()
+    const [darkmode, setDarkmode] = useState(false)
+
+    const handleDarkmode = () => {
+      setDarkmode(!darkmode)
+    }
 
     function fetchArticle(url){
         fetch(url)

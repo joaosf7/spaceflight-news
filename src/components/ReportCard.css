@@ -9,6 +9,7 @@
 
 #report-card:hover {
     cursor: pointer;
+    background-color: #70707050;
 }
 
 #report-card-image {
