@@ -1,0 +1,28 @@
+#article-view {
+    max-width: 80vw;
+}
+
+.article-view-image {
+    max-height: 50vh;
+    max-width: 50vw;
+    border-radius: 5%;
+}
+
+.article-title{
+    color:#110EA7;
+    font-size: 300%;
+}
+
+.darkmode .article-title {
+    color: #9E1818;
+}
+
+.summary{
+    font-size: 200%;
+}
+
+@media screen and (min-width:1000px){
+    .summary{
+        font-size: 150%;
+    }
+}

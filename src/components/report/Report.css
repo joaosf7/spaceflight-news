@@ -8,25 +8,26 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     max-width: 80vw;
     overflow-y: scroll;
     margin-bottom: 20px;
-    max-height: 50vh;
+    max-height: 60vh;
 }
 
-#news-title {
+#report-title {
     color:brown;
+    font-size: 400%;
 }
 
-#main-frame {
+#report-frame {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 .arrow-image {
-    max-width: 40px;
+    width: 100px;
     margin-left: 30px;
     margin-right: 30px;
 }
@@ -52,9 +53,22 @@
 
 .up-down-arrow {
     height: 50px;
-    margin-bottom: 15px;
 }
 
 .up-down-arrow:hover {
     cursor: pointer;
+}
+
+.order-filter-box{
+    margin-top: 10px;
+}
+
+
+@media screen and (min-width: 1000px){
+    #report-title {
+        font-size: 300%;
+    }
+    .arrow-image {
+        width: 60px;
+    }
 }

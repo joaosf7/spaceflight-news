@@ -10,9 +10,9 @@ function BlogView({blog}){
             style={{ textDecoration: 'none', color: 'inherit' }}
         >
             <div>
-                <h1>{blog.title}</h1>
+                <h1 className='blog-title'>{blog.title}</h1>
                 <img className="blog-view-image" src={blog.image_url} alt="blog" />
-                <p>{blog.summary}</p>
+                <p className='summary'>{blog.summary}</p>
                 <h4>Published at: {blog.published_at.slice(0, 10)}</h4>
             </div>
         </a>

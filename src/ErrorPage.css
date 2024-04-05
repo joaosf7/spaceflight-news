@@ -5,3 +5,7 @@
     cursor: pointer;
     padding: 20px;
 }
+
+.error-message{
+    color: red;
+}

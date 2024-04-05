@@ -17,6 +17,7 @@
     margin-top: 10px;
     max-width:30vw;
     max-height: 19vh;
+    border-radius: 5%;
 }
 
 .news-card-title {

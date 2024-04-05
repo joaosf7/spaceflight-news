@@ -1,24 +1,33 @@
 import { useState, useEffect } from "react"
 import BlogView from './BlogView'
 import BlogCard from './BlogCard'
-import loadingImage from '../assets/images/loading.gif'
-import leftArrow from '../assets/images/leftArrow.png'
-import rightArrow from '../assets/images/rightArrow.png'
-import upArrow from '../assets/images/upArrow.png'
-import downArrow from '../assets/images/downArrow.png'
+import leftArrow from '../../assets/images/leftArrow.png'
+import rightArrow from '../../assets/images/rightArrow.png'
+import upArrow from '../../assets/images/upArrow.png'
+import downArrow from '../../assets/images/downArrow.png'
 import './Blog.css'
+import ErrorPage from "../../ErrorPage"
+import Loading from "../Loading"
+
 
 function Blog(){
     const SAMPLE_INPUT = 'Search blogs...'
     const [blogs, setBlogs] = useState([])
     const [searchTerm, setSearchTerm] = useState(SAMPLE_INPUT)
     const [selectedBlog, setSelectedBlog] = useState()
+    const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false)
 
     function fetchBlog(url){
+        setLoading(true)
+        setSelectedBlog(null)
         fetch(url)
             .then(res => res.json())
-            .then(data => setBlogs(data))
-            .catch(error => console.error('Error fetching blog: ' + error))
+            .then(data => {
+                setBlogs(data)
+                setLoading(false)
+            })
+            .catch(error => setError(error.message))
     }
 
     useEffect(() => {
@@ -53,6 +62,7 @@ function Blog(){
     }
 
     const handleSelectedBlog = (id) => {
+        setLoading(true)
         fetch("https://api.spaceflightnewsapi.net/v4/blogs/" + id)
             .then(res => res.json())
             .then(data => {
@@ -61,24 +71,30 @@ function Blog(){
                     behavior: 'smooth'
                 });
                 setSelectedBlog(data)
+                setLoading(false)
             })
-            .catch(error => console.error(error))
+            .catch(error => setError(error.message))
+    }
+
+    if(error)
+        return <ErrorPage error={error} />
+
+    if(loading){
+        return <Loading />
     }
 
     return(
         <div id='main'>
-            {selectedBlog && <BlogView blog={selectedBlog} />}
-            <h1 id="blog-title">Spiciest Blogs!</h1>
-            <form
-                onSubmit={handleSubmit}>
-                <input
-                    id="input-box"
-                    value={searchTerm}
-                    onChange={handleSearchInput}
-                    onClick={() => setSearchTerm('')}
-                />
-            </form>
             <div className="order-filter-box">
+                <form
+                    onSubmit={handleSubmit}>
+                    <input
+                        id="input-box"
+                        value={searchTerm}
+                        onChange={handleSearchInput}
+                        onClick={() => setSearchTerm('')}
+                    />
+                </form>
                 <img className="up-down-arrow" src={upArrow} alt='up arrow'
                     onClick={sortByRecent}
                 />
@@ -86,28 +102,24 @@ function Blog(){
                     onClick={sortByOlder}
                 />
             </div>
+            {selectedBlog && <BlogView blog={selectedBlog} />}
+            <h1 id="blog-title">Spiciest Blogs!</h1>
             <div id='main-frame'>
-            {blogs.previous ? 
-                <img className='arrow-image' src={leftArrow} alt="left arrow" 
-                    onClick={getPreviousBlogList}/>
-                :
-                ''
-            }
+                {blogs.previous && 
+                    <img className='arrow-image' src={leftArrow} alt="left arrow" 
+                        onClick={getPreviousBlogList}/>
+                }
                 <div id="card-list">
-                    {blogs.length === 0 ?
-                            <img src={loadingImage} alt="loading image" />
-                        :
-                            blogs.results.map(blog => (
-                                <BlogCard key={blog.id} blog={blog} toogleSelectedBlog={handleSelectedBlog} />
+                    {
+                        blogs.results?.map(blog => (
+                            <BlogCard key={blog.id} blog={blog} toogleSelectedBlog={handleSelectedBlog} />
                         ))
                     }
                 </div>
-                {blogs.next ?
+                {blogs.next &&
                     <img className='arrow-image' src={rightArrow} alt="right arrow" 
                         onClick={getNextBlogList}
                     />
-                    :
-                    ''
                 }
             </div>
         </div>

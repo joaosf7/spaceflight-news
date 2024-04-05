@@ -1,24 +1,32 @@
 import { useState, useEffect } from "react"
 import ReportView from './ReportView'
 import ReportCard from './ReportCard'
-import loadingImage from '../assets/images/loading.gif'
-import leftArrow from '../assets/images/leftArrow.png'
-import rightArrow from '../assets/images/rightArrow.png'
-import upArrow from '../assets/images/upArrow.png'
-import downArrow from '../assets/images/downArrow.png'
+import leftArrow from '../../assets/images/leftArrow.png'
+import rightArrow from '../../assets/images/rightArrow.png'
+import upArrow from '../../assets/images/upArrow.png'
+import downArrow from '../../assets/images/downArrow.png'
 import './Report.css'
+import ErrorPage from '../../ErrorPage'
+import Loading from "../Loading"
 
 function Report(){
     const SAMPLE_INPUT = 'Search reports...'
     const [reports, setReports] = useState([])
     const [searchTerm, setSearchTerm] = useState(SAMPLE_INPUT)
     const [selectedReport, setSelectedReport] = useState()
+    const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false)
 
     function fetchReport(url){
+        setLoading(true)
+        setSelectedReport(null)
         fetch(url)
             .then(res => res.json())
-            .then(data => setReports(data))
-            .catch(error => console.error('Error fetching report: ' + error))
+            .then(data => {
+                setReports(data)
+                setLoading(false)
+            })
+            .catch(error => setError(error.message))
     }
 
     useEffect(() => {
@@ -53,6 +61,7 @@ function Report(){
     }
 
     const handleSelectedReport = (id) => {
+        setLoading(true)
         fetch("https://api.spaceflightnewsapi.net/v4/reports/" + id)
             .then(res => res.json())
             .then(data => {
@@ -61,24 +70,31 @@ function Report(){
                     behavior: 'smooth'
                 });
                 setSelectedReport(data)
+                setLoading(false)
             })
-            .catch(error => console.error(error))
+            .catch(error => setError(error.message))
+    }
+
+    if (error){
+        return <ErrorPage error={error} />
+    }
+    
+    if(loading){
+        return <Loading />
     }
 
     return(
         <div id='main'>
-            {selectedReport && <ReportView report={selectedReport} />}
-            <h1 id="report-title">Daily Reports</h1>
-            <form
-                onSubmit={handleSubmit}>
-                <input
-                    id="input-box"
-                    value={searchTerm}
-                    onChange={handleSearchInput}
-                    onClick={() => setSearchTerm('')}
-                />
-            </form>
             <div className="order-filter-box">
+                <form
+                    onSubmit={handleSubmit}>
+                    <input
+                        id="input-box"
+                        value={searchTerm}
+                        onChange={handleSearchInput}
+                        onClick={() => setSearchTerm('')}
+                    />
+                </form>
                 <img className="up-down-arrow" src={upArrow} alt='up arrow'
                     onClick={sortByRecent}
                 />
@@ -86,28 +102,24 @@ function Report(){
                     onClick={sortByOlder}
                 />
             </div>
+            {selectedReport && <ReportView report={selectedReport} />}
+            <h1 id="report-title">Daily Reports</h1>
             <div id='main-frame'>
-            {reports.previous ? 
+            {reports.previous &&
                 <img className='arrow-image' src={leftArrow} alt="left arrow" 
                     onClick={getPreviousReportList}/>
-                :
-                ''
             }
                 <div id="card-list">
-                    {reports.length === 0 ?
-                            <img src={loadingImage} alt="loading image" />
-                        :
-                            reports.results.map(report => (
-                                <ReportCard key={report.id} report={report} toogleSelectedReport={handleSelectedReport} />
+                    {
+                        reports.results?.map(report => (
+                            <ReportCard key={report.id} report={report} toogleSelectedReport={handleSelectedReport} />
                         ))
                     }
                 </div>
-                {reports.next ?
+                {reports.next &&
                     <img className='arrow-image' src={rightArrow} alt="right arrow" 
                         onClick={getNextReportList}
                     />
-                    :
-                    ''
                 }
             </div>
         </div>

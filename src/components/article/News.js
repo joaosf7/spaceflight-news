@@ -1,29 +1,32 @@
 import { useState, useEffect } from "react"
-import NewsCard from './NewsCard.js'
-import ArticleView from './ArticleView.js'
+import NewsCard from './NewsCard'
+import ArticleView from './ArticleView'
 import './News.css'
-import loadingImage from '../assets/images/loading.gif'
-import leftArrow from '../assets/images/leftArrow.png'
-import rightArrow from '../assets/images/rightArrow.png'
-import upArrow from '../assets/images/upArrow.png'
-import downArrow from '../assets/images/downArrow.png'
+import leftArrow from '../../assets/images/leftArrow.png'
+import rightArrow from '../../assets/images/rightArrow.png'
+import upArrow from '../../assets/images/upArrow.png'
+import downArrow from '../../assets/images/downArrow.png'
+import ErrorPage from '../../ErrorPage'
+import Loading from '../Loading'
 
 function News() {
     const SAMPLE_INPUT = 'Search articles...'
     const [articles, setArticles] = useState([])
     const [searchTerm, setSearchTerm] = useState(SAMPLE_INPUT)
     const [selectedArticle, setSelectedArticle] = useState()
-    const [darkmode, setDarkmode] = useState(false)
-
-    const handleDarkmode = () => {
-      setDarkmode(!darkmode)
-    }
+    const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false)
 
     function fetchArticle(url){
+        setLoading(true)
+        setSelectedArticle(null)
         fetch(url)
             .then(res => res.json())
-            .then(data => setArticles(data))
-            .catch(error => console.error('Error fetching article: ' + error))
+            .then(data => {
+                setLoading(false)
+                setArticles(data)
+            })
+            .catch(error => setError(error.message))
     }
 
     useEffect(() => {
@@ -58,6 +61,7 @@ function News() {
     }
 
     const handleSelectedArticle = (id) => {
+        setLoading(true)
         fetch("https://api.spaceflightnewsapi.net/v4/articles/" + id)
             .then(res => res.json())
             .then(data => {
@@ -66,24 +70,29 @@ function News() {
                     behavior: 'smooth'
                 });
                 setSelectedArticle(data)
+                setLoading(false)
             })
-            .catch(error => console.error(error))
+            .catch(error => setError(error.message))
     }
+
+    if(error)
+        return <ErrorPage error={error} />
+    
+    if(loading)
+        return <Loading />
 
     return(
         <div id='main'>
-            {selectedArticle && <ArticleView article={selectedArticle} />}
-            <h1 id="news-title">Latest Spaceflight news</h1>
-            <form
-                onSubmit={handleSubmit}>
-                <input
-                    id="input-box"
-                    value={searchTerm}
-                    onChange={handleSearchInput}
-                    onClick={() => setSearchTerm('')}
-                />
-            </form>
             <div className="order-filter-box">
+                <form
+                    onSubmit={handleSubmit}>
+                    <input
+                        id="input-box"
+                        value={searchTerm}
+                        onChange={handleSearchInput}
+                        onClick={() => setSearchTerm('')}
+                    />
+                </form>
                 <img className="up-down-arrow" src={upArrow} alt='up arrow'
                     onClick={sortByRecent}
                 />
@@ -91,28 +100,25 @@ function News() {
                     onClick={sortByOlder}
                 />
             </div>
+            {selectedArticle && <ArticleView key={selectedArticle.id} article={selectedArticle} />}
+            <h1 id="news-title">Latest Spaceflight news</h1>
+           
             <div id='main-frame'>
-            {articles.previous ? 
+            {articles.previous &&
                 <img className='arrow-image' src={leftArrow} alt="left arrow" 
                     onClick={getPreviousArticleList}/>
-                :
-                ''
             }
                 <div id="card-list">
-                    {articles.length === 0 ?
-                            <img src={loadingImage} alt="loading image" />
-                        :
-                            articles.results.map(article => (
-                                <NewsCard key={article.id} article={article} toogleSelectedArticle={handleSelectedArticle} />
-                        ))
+                    {
+                        articles.results?.map(article => (
+                            <NewsCard key={article.id} article={article} toogleSelectedArticle={handleSelectedArticle} />
+                        ))    
                     }
                 </div>
-                {articles.next ?
+                {articles.next &&
                     <img className='arrow-image' src={rightArrow} alt="right arrow" 
                         onClick={getNextArticleList}
                     />
-                    :
-                    ''
                 }
             </div>
         </div>

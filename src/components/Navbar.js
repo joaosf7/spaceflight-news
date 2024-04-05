@@ -9,7 +9,7 @@ function Navbar(props) {
         <div className='navbar'>
           <img id='navbar-logo' src={spaceflightLogo} alt='spaceflight logo'/>
           <Link className='link-box' to='/'>
-            <h1>SPACEFLIGHT NEWS</h1>
+            <h1 id='navbar-title'>SPACEFLIGHT NEWS</h1>
           </Link>
           <img
             id='darkmode-switch'
@@ -20,8 +20,8 @@ function Navbar(props) {
         </div>
           <div className="navbar-links">
             <Link className="navbar-link" to="/news">Articles</Link>
-            <Link to='/blogs' className='navbar-link'>Blogs</Link>
-            <Link to='/reports' className='navbar-link'>Reports</Link>
+            <Link className='navbar-link' to='/blogs'>Blogs</Link>
+            <Link className='navbar-link' to='/reports'>Reports</Link>
           </div>
       </header>
     );
