@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
-import ReportView from './ReportView'
-import ReportCard from './ReportCard'
+import View from '../View'
+import Card from '../Card'
 import './Report.css'
 import ErrorPage from '../../ErrorPage'
 import Loading from "../Loading"
@@ -104,7 +104,7 @@ function Report(){
                     />
                 </div>
             </div>
-            {selectedReport && <ReportView report={selectedReport} />}
+            {selectedReport && <View data={selectedReport} />}
             <h1 id="report-title">Daily Reports</h1>
             <div id='main-frame'>
             {reports.previous ?
@@ -115,7 +115,7 @@ function Report(){
                 <div className="card-list">
                     {
                         reports.results?.map(report => (
-                            <ReportCard key={report.id} report={report} toogleSelectedReport={handleSelectedReport} />
+                            <Card key={report.id} data={report} toogleSelected={handleSelectedReport} />
                         ))
                     }
                 </div>

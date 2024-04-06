@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
-import BlogView from './BlogView'
-import BlogCard from './BlogCard'
+import View from '../View'
+import Card from '../Card'
 import './Blog.css'
 import ErrorPage from "../../ErrorPage"
 import Loading from "../Loading"
@@ -104,7 +104,7 @@ function Blog(){
                     />
                 </div>
             </div>
-            {selectedBlog && <BlogView blog={selectedBlog} />}
+            {selectedBlog && <View data={selectedBlog} />}
             <h1 id="blog-title">Spiciest space stories!</h1>
             <div id='main-frame'>
                 {blogs.previous ? 
@@ -115,7 +115,7 @@ function Blog(){
                 <div className="card-list">
                     {
                         blogs.results?.map(blog => (
-                            <BlogCard key={blog.id} blog={blog} toogleSelectedBlog={handleSelectedBlog} />
+                            <Card key={blog.id} data={blog} toogleSelected={handleSelectedBlog} />
                         ))
                     }
                 </div>

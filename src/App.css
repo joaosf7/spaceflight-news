@@ -106,23 +106,23 @@
   text-decoration: none;
 }
 
-.launch-title{
+.view-launch-title{
 color: red;
 }
 
-.published-at{
+.view-published-at{
   color:#440D4D;
 }
-.darkmode .published-at{
+.darkmode .view-published-at{
 color: #d8ff3a;
 }
 
-.summary {
+.view-summary {
   color: #440D4D;
   font-size: 180%;
   font-weight: 800;
 }
-.darkmode .summary {
+.darkmode .view-summary {
   color:#fafab7;
 }
 
@@ -144,12 +144,13 @@ color: #d8ff3a;
   font-weight: 700;
 }
 
+
 .darkmode .view-title {
   color: #9E1818;
 }
 
 @media screen and (min-width:1000px){
-  .summary{
+  .view-summary{
       font-size: 120%;
   }
 }

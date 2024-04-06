@@ -1,4 +1,4 @@
-#report-card {
+.card {
     display: flex;
     justify-content: space-between;
     align-items:center;
@@ -8,30 +8,30 @@
     flex: 0 0 auto;
 }
 
-#report-card:hover {
+.card:hover {
     cursor: pointer;
     background-color: #70707050;
 }
 
-#report-card-image {
+.card-image {
     margin-top: 10px;
     max-width:30vw;
     max-height: 19vh;
     border-radius: 5%;
 }
 
-.report-card-title {
+.card-title {
     height:fit-content;
     font-size:large;
     font-weight: 900;
     min-width: 150px;
 }
 
-.darkmode .report-card-title {
+.darkmode .card-title {
     color:#fafab7
 }
 
-.report-card-release {
+.card-release {
     color: brown;
     align-self: flex-end;
 }
@@ -40,7 +40,7 @@
     min-height: 100px;
 }
 
-.report-card-summary{
-    height: 25px;
+.card-summary{
+    height: 1em;
     overflow: hidden;
 }

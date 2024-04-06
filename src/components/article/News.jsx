@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
-import NewsCard from './NewsCard'
-import ArticleView from './ArticleView'
+import Card from '../Card'
+import View from '../View'
 import './News.css'
 import ErrorPage from '../../ErrorPage'
 import Loading from '../Loading'
@@ -102,7 +102,7 @@ function News() {
                     ></i>
                 </div>
             </div>
-            {selectedArticle && <ArticleView key={selectedArticle.id} article={selectedArticle} />}
+            {selectedArticle && <View key={selectedArticle.id} data={selectedArticle} />}
             <h1 id="news-title">Latest Spaceflight news</h1>
             <div id='main-frame'>
             {articles.previous ?
@@ -113,7 +113,7 @@ function News() {
                 <div className="card-list">
                     {
                         articles.results?.map((article) => (
-                                <NewsCard key={article.id} article={article} toogleSelectedArticle={handleSelectedArticle} />
+                                <Card key={article.id} data={article} toogleSelected={handleSelectedArticle} />
                         ))    
                     }
                 </div>
