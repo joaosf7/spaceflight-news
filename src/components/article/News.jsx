@@ -2,8 +2,6 @@ import { useState, useEffect } from "react"
 import NewsCard from './NewsCard'
 import ArticleView from './ArticleView'
 import './News.css'
-import upArrow from '../../assets/images/upArrow.png'
-import downArrow from '../../assets/images/downArrow.png'
 import ErrorPage from '../../ErrorPage'
 import Loading from '../Loading'
 import leftArrowDummy from '../../assets/images/leftArrowDummy.png'
