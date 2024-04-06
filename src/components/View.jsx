@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 function View({data}){
     return(
-        <Link className='link view' to={data.url}>
+        <Link className='link view' to={data.url} target="_blank" rel="noopener noreferrer">
             <div>
                 <h1 className='view-title'>{data.title}</h1>
                 <img className="view-image" src={data.image_url} alt="data" />

@@ -4,7 +4,7 @@ import Footer from './components/Footer'
 import News from './components/article/News'
 import Blog from './components/blog/Blog'
 import Report from './components/report/Report'
-import ErrorPage from './ErrorPage'
+import ErrorPage from './components/ErrorPage'
 import { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 

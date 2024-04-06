@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import Card from '../Card'
 import View from '../View'
 import './News.css'
-import ErrorPage from '../../ErrorPage'
+import ErrorPage from '../ErrorPage'
 import Loading from '../Loading'
 import leftArrowDummy from '../../assets/images/leftArrowDummy.png'
 import rightArrowDummy from '../../assets/images/rightArrowDummy.png'
