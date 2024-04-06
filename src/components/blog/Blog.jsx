@@ -108,7 +108,7 @@ function Blog(){
             <h1 id="blog-title">Spiciest space stories!</h1>
             <div id='main-frame'>
                 {blogs.previous ? 
-                    <i className="fa-solid fa-circle-left arrow-image" onClick={getNextBlogList}></i>
+                    <i className="fa-solid fa-circle-left arrow-image" onClick={getPreviousBlogList}></i>
                     :
                     <img className="arrow-image-dummy" src={leftArrowDummy} alt="left arrow dummy" />
                 }

@@ -108,7 +108,7 @@ function Report(){
             <h1 id="report-title">Daily Reports</h1>
             <div id='main-frame'>
             {reports.previous ?
-                <i className="fa-solid fa-circle-left arrow-image" onClick={getNextReportList}></i>
+                <i className="fa-solid fa-circle-left arrow-image" onClick={getPreviousReportList}></i>
                 :
                 <img className="arrow-image-dummy" src={leftArrowDummy} alt="left arrow dummy" />
             }
