@@ -10,7 +10,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 
 function App() {
-  const [darkmode, setDarkmode] = useState(false)
+  const [darkmode, setDarkmode] = useState(window.matchMedia("(prefers-color-scheme:dark)").matches)
 
   const handleDarkmode = () => {
     setDarkmode(!darkmode)
