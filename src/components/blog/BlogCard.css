@@ -22,7 +22,12 @@
 .blog-card-title {
     height:max-content;
     font-size:large;
+    font-weight: 900;
     overflow: hidden;
+}
+
+.darkmode .blog-card-title {
+    color:#fafab7
 }
 
 .blog-card-release {

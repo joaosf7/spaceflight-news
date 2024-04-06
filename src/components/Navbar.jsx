@@ -5,10 +5,11 @@ import {Link} from 'react-router-dom'
 
 function Navbar(props) {
     return (
+      //   <img className='title-image' src={props.darkmode ? titleImage : darkmodeTitleImage} alt='title' />
       <header>
         <div className='navbar'>
-          <img id='navbar-logo' src={spaceflightLogo} alt='spaceflight logo'/>
           <Link className='link-box' to='/'>
+            <img id='navbar-logo' src={spaceflightLogo} alt='spaceflight logo'/>
             <h1 id='navbar-title'>SPACEFLIGHT NEWS</h1>
           </Link>
           <img

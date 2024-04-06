@@ -8,9 +8,11 @@ import upArrow from '../../assets/images/upArrow.png'
 import downArrow from '../../assets/images/downArrow.png'
 import ErrorPage from '../../ErrorPage'
 import Loading from '../Loading'
+import leftArrowDummy from '../../assets/images/leftArrowDummy.png'
+import rightArrowDummy from '../../assets/images/rightArrowDummy.png'
 
 function News() {
-    const SAMPLE_INPUT = 'Search articles...'
+    const SAMPLE_INPUT = 'Search...'
     const [articles, setArticles] = useState([])
     const [searchTerm, setSearchTerm] = useState(SAMPLE_INPUT)
     const [selectedArticle, setSelectedArticle] = useState()
@@ -93,20 +95,23 @@ function News() {
                         onClick={() => setSearchTerm('')}
                     />
                 </form>
-                <img className="up-down-arrow" src={upArrow} alt='up arrow'
-                    onClick={sortByRecent}
-                />
-                <img className="up-down-arrow" src={downArrow} alt='down arrow'
-                    onClick={sortByOlder}
-                />
+                <div className="arrow-box">
+                    <img className="up-down-arrow" src={upArrow} alt='up arrow'
+                        onClick={sortByRecent}
+                    />
+                    <img className="up-down-arrow" src={downArrow} alt='down arrow'
+                        onClick={sortByOlder}
+                    />
+                </div>
             </div>
             {selectedArticle && <ArticleView key={selectedArticle.id} article={selectedArticle} />}
             <h1 id="news-title">Latest Spaceflight news</h1>
-           
             <div id='main-frame'>
-            {articles.previous &&
+            {articles.previous ?
                 <img className='arrow-image' src={leftArrow} alt="left arrow" 
                     onClick={getPreviousArticleList}/>
+                :
+                <img className="arrow-image-dummy" src={leftArrowDummy} alt="left arrow dummy" />
             }
                 <div id="card-list">
                     {
@@ -115,10 +120,12 @@ function News() {
                         ))    
                     }
                 </div>
-                {articles.next &&
+                {articles.next ?
                     <img className='arrow-image' src={rightArrow} alt="right arrow" 
                         onClick={getNextArticleList}
                     />
+                    :
+                    <img className="arrow-image-dummy" src={rightArrowDummy} alt="right arrow dummy" />
                 }
             </div>
         </div>

@@ -12,12 +12,13 @@
     max-width: 80vw;
     overflow-y: scroll;
     margin-bottom: 20px;
-    max-height: 60vh;
+    max-height: 60dvh;
 }
 
 #blog-title {
     color:brown;
     font-size: 400%;
+    font-weight: 700;
 }
 
 #blog-frame {

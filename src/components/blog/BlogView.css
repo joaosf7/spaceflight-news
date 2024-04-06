@@ -11,6 +11,7 @@
 
 .blog-title{
     color:#110EA7;
+    font-weight: 700;
 }
 
 .darkmode .blog-title {
@@ -19,11 +20,14 @@
 
 
 .summary{
-    font-size: 200%;
+    font-size: 150%;
 }
 
+.darkmode .summary {
+    color:#fafab7
+}
 @media screen and (min-width:1000px){
     .summary{
-        font-size: 150%;
+        font-size: 100%;
     }
 }

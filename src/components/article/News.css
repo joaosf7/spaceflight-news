@@ -7,13 +7,12 @@
 
 #card-list {
     display:flex;
-    flex-direction: column;
     align-items: center;
     justify-content: space-around;
     max-width: 80vw;
     width: 60vw;
-    overflow-y: hidden;
-    overflow-x: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     max-height: 50vh;
     height: 50vh;
     padding: 0;
@@ -24,6 +23,7 @@
 #news-title {
     color:brown;
     font-size: 400%;
+    font-weight: 700;
 }
 
 
@@ -33,7 +33,7 @@
     justify-content: space-between;
 }
 
-.arrow-image {
+.arrow-image, .arrow-image-dummy {
     width: 100px;
     margin-left: 30px;
     margin-right: 30px;
@@ -45,13 +45,20 @@
 
 #input-box {
     border-radius: 50%;
-    border-width: 0;
     border: 0px;
     height: 30px;
     font-size: larger;
+    font-weight: 600;
     color: #161336;
     margin-bottom: 30px;
     text-align: center;
+    background-color: #CFD2D3;
+    margin-top: 30px;
+}
+
+.darkmode #input-box{
+    background-color: #323232;
+    color: rgb(255, 255, 255);
 }
 
 #input-box:focus {
@@ -69,6 +76,9 @@
 
 .order-filter-box{
     display: flex;
+    align-items: center;
+    justify-content:space-around;
+    width: 100%;
 }
 
 @media screen and (min-width: 1000px){

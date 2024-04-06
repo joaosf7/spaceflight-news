@@ -1,7 +1,7 @@
 #report-card {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items:center;
     max-width: 30vw;
     margin-bottom: 20px;
@@ -21,6 +21,13 @@
 
 .report-card-title {
     height:fit-content;
+    font-size:large;
+    font-weight: 900;
+    width: 150px;
+}
+
+.darkmode .report-card-title {
+    color:#fafab7
 }
 
 .report-card-release {

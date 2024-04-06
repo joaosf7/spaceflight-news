@@ -1,3 +1,7 @@
+header{
+    display: flex;
+    flex-direction: column;
+}
 .navbar{
     margin: 0;
     padding: 0;
@@ -5,6 +9,7 @@
     justify-content: space-between;
     align-items: center;
     max-width: 70vw;
+    width: 100vw;
     flex-wrap: nowrap;
     margin-bottom: 10px;
 }
@@ -14,9 +19,15 @@
 }
 
 #navbar-title{
-    font-size: 350%;
+    font-weight: 900;
+    max-width: 200px;
+    text-align:left;
+    font-size: 250%;
 }
 
+#darkmode-switch{
+    justify-self: end;
+}
 #darkmode-switch:hover {
     cursor: pointer;
 }
@@ -27,13 +38,17 @@
 }
 
 .link-box {
+    display: flex;
+    align-items: center;
     text-decoration: none;
     color: inherit;
     font-family: inherit;
+    box-shadow: 3ch;
 }
 
 .navbar-links {
     display: flex;
+    box-shadow: 3ch;
 }
 
 .navbar-link {
@@ -48,11 +63,13 @@
     border-radius: 20%;
     color: #282108;
     font-size: 200%;
+    box-shadow: 3ch;
+    text-shadow: #C70130;
 }
 
 #darkmode-switch{
     margin-left: 20px;
-    max-height: 90px;
+    max-height: 100px;
 }
 
 .darkmode .navbar-link {
@@ -68,9 +85,14 @@
         max-height: 100px;
     }
     #navbar-title{
-        font-size: 150%;
+        font-size: 250%;
     }
     .navbar-link {
         font-size: 100%;
     }
+    #darkmode-switch{
+        margin-left: 20px;
+        max-height: 80px;
+    }
+    
 }

@@ -18,8 +18,8 @@ function App() {
 
   return (
       <BrowserRouter>
-        <div className={darkmode ? 'App' : 'App darkmode'}>
-          <Navbar toogleDarkmode={handleDarkmode}/>
+        <div className={darkmode ? 'App darkmode' : 'App'}>
+          <Navbar darkmode={darkmode} toogleDarkmode={handleDarkmode}/>
           <Routes>
             <Route exact path='/' element={<News /> } errorElement={<ErrorPage />}/>
             <Route path='/news' element={<News />} />

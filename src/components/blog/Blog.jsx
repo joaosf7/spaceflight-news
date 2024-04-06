@@ -8,10 +8,12 @@ import downArrow from '../../assets/images/downArrow.png'
 import './Blog.css'
 import ErrorPage from "../../ErrorPage"
 import Loading from "../Loading"
+import leftArrowDummy from '../../assets/images/leftArrowDummy.png'
+import rightArrowDummy from '../../assets/images/rightArrowDummy.png'
 
 
 function Blog(){
-    const SAMPLE_INPUT = 'Search blogs...'
+    const SAMPLE_INPUT = 'Search...'
     const [blogs, setBlogs] = useState([])
     const [searchTerm, setSearchTerm] = useState(SAMPLE_INPUT)
     const [selectedBlog, setSelectedBlog] = useState()
@@ -95,19 +97,23 @@ function Blog(){
                         onClick={() => setSearchTerm('')}
                     />
                 </form>
-                <img className="up-down-arrow" src={upArrow} alt='up arrow'
-                    onClick={sortByRecent}
-                />
-                <img className="up-down-arrow" src={downArrow} alt='down arrow'
-                    onClick={sortByOlder}
-                />
+                <div className="arrow-box">
+                    <img className="up-down-arrow" src={upArrow} alt='up arrow'
+                        onClick={sortByRecent}
+                    />
+                    <img className="up-down-arrow" src={downArrow} alt='down arrow'
+                        onClick={sortByOlder}
+                    />
+                </div>
             </div>
             {selectedBlog && <BlogView blog={selectedBlog} />}
-            <h1 id="blog-title">Spiciest Blogs!</h1>
+            <h1 id="blog-title">Spiciest space stories!</h1>
             <div id='main-frame'>
-                {blogs.previous && 
+                {blogs.previous ? 
                     <img className='arrow-image' src={leftArrow} alt="left arrow" 
                         onClick={getPreviousBlogList}/>
+                        :
+                <img className="arrow-image-dummy" src={leftArrowDummy} alt="left arrow dummy" />
                 }
                 <div id="card-list">
                     {
@@ -116,10 +122,12 @@ function Blog(){
                         ))
                     }
                 </div>
-                {blogs.next &&
+                {blogs.next ?
                     <img className='arrow-image' src={rightArrow} alt="right arrow" 
                         onClick={getNextBlogList}
                     />
+                    :
+                    <img className="arrow-image-dummy" src={rightArrowDummy} alt="right arrow dummy" />
                 }
             </div>
         </div>

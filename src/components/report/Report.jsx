@@ -8,9 +8,11 @@ import downArrow from '../../assets/images/downArrow.png'
 import './Report.css'
 import ErrorPage from '../../ErrorPage'
 import Loading from "../Loading"
+import leftArrowDummy from '../../assets/images/leftArrowDummy.png'
+import rightArrowDummy from '../../assets/images/rightArrowDummy.png'
 
 function Report(){
-    const SAMPLE_INPUT = 'Search reports...'
+    const SAMPLE_INPUT = 'Search...'
     const [reports, setReports] = useState([])
     const [searchTerm, setSearchTerm] = useState(SAMPLE_INPUT)
     const [selectedReport, setSelectedReport] = useState()
@@ -95,19 +97,23 @@ function Report(){
                         onClick={() => setSearchTerm('')}
                     />
                 </form>
-                <img className="up-down-arrow" src={upArrow} alt='up arrow'
-                    onClick={sortByRecent}
-                />
-                <img className="up-down-arrow" src={downArrow} alt='down arrow'
-                    onClick={sortByOlder}
-                />
+                <div className="arrow-box">
+                    <img className="up-down-arrow" src={upArrow} alt='up arrow'
+                        onClick={sortByRecent}
+                    />
+                    <img className="up-down-arrow" src={downArrow} alt='down arrow'
+                        onClick={sortByOlder}
+                    />
+                </div>
             </div>
             {selectedReport && <ReportView report={selectedReport} />}
             <h1 id="report-title">Daily Reports</h1>
             <div id='main-frame'>
-            {reports.previous &&
+            {reports.previous ?
                 <img className='arrow-image' src={leftArrow} alt="left arrow" 
                     onClick={getPreviousReportList}/>
+                :
+                <img className="arrow-image-dummy" src={leftArrowDummy} alt="left arrow dummy" />
             }
                 <div id="card-list">
                     {
@@ -116,10 +122,12 @@ function Report(){
                         ))
                     }
                 </div>
-                {reports.next &&
+                {reports.next ?
                     <img className='arrow-image' src={rightArrow} alt="right arrow" 
                         onClick={getNextReportList}
                     />
+                    :
+                    <img className="arrow-image-dummy" src={rightArrowDummy} alt="right arrow dummy" />
                 }
             </div>
         </div>

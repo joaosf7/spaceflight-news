@@ -24,7 +24,12 @@
     margin-top: 10px;
     height:max-content;
     font-size:large;
+    font-weight: 900;
     overflow: hidden;
+}
+
+.darkmode .news-card-title {
+    color:#fafab7
 }
 
 .news-card-release {
