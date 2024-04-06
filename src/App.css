@@ -43,7 +43,7 @@
 }
 
 #input-box {
-  border-radius: 50%;
+  border-radius:  20px 20px 20px 20px;
   border: 0px;
   height: 30px;
   font-size: larger;
@@ -153,4 +153,13 @@ color: #d8ff3a;
   .view-summary{
       font-size: 120%;
   }
+}
+
+.submit-button{
+  font-size: 170%;
+  margin-left: 20px;
+}
+
+.submit-button:hover{
+  cursor: pointer;
 }

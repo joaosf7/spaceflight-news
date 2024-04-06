@@ -17,21 +17,6 @@
     justify-content: space-between;
 }
 
-
-#input-box {
-    border-radius: 50%;
-    border-width: 0;
-    border: 0px;
-    height: 30px;
-    font-size: larger;
-    color: #161336;
-    text-align: center;
-}
-
-#input-box:focus {
-    outline: none;
-}
-
 @media screen and (min-width: 1000px){
     #blog-title {
         font-size: 300%;

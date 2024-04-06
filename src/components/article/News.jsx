@@ -90,6 +90,10 @@ function News() {
                         onChange={handleSearchInput}
                         onClick={() => setSearchTerm('')}
                     />
+                    <i
+                        class="fa-solid fa-square submit-button"
+                        onClick={handleSubmit}
+                    />
                 </form>
                 <div className="arrow-box">
                     <i
