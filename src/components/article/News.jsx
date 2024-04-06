@@ -94,12 +94,14 @@ function News() {
                     />
                 </form>
                 <div className="arrow-box">
-                    <img className="up-down-arrow" src={upArrow} alt='up arrow'
+                    <i
+                        className="fa-solid fa-circle-arrow-up up-down-arrow"
                         onClick={sortByRecent}
-                    />
-                    <img className="up-down-arrow" src={downArrow} alt='down arrow'
+                    ></i>
+                    <i
+                        className="fa-solid fa-circle-arrow-down up-down-arrow"
                         onClick={sortByOlder}
-                    />
+                    ></i>
                 </div>
             </div>
             {selectedArticle && <ArticleView key={selectedArticle.id} article={selectedArticle} />}

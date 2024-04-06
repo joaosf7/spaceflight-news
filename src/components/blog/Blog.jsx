@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react"
 import BlogView from './BlogView'
 import BlogCard from './BlogCard'
-import upArrow from '../../assets/images/upArrow.png'
-import downArrow from '../../assets/images/downArrow.png'
 import './Blog.css'
 import ErrorPage from "../../ErrorPage"
 import Loading from "../Loading"
@@ -96,10 +94,12 @@ function Blog(){
                     />
                 </form>
                 <div className="arrow-box">
-                    <img className="up-down-arrow" src={upArrow} alt='up arrow'
+                    <i
+                        className="fa-solid fa-circle-arrow-up up-down-arrow"
                         onClick={sortByRecent}
                     />
-                    <img className="up-down-arrow" src={downArrow} alt='down arrow'
+                    <i
+                        className="fa-solid fa-circle-arrow-down up-down-arrow"
                         onClick={sortByOlder}
                     />
                 </div>
@@ -115,10 +115,7 @@ function Blog(){
                 <div className="card-list">
                     {
                         blogs.results?.map(blog => (
-                            <>
-                                <BlogCard key={blog.id} blog={blog} toogleSelectedBlog={handleSelectedBlog} />
-                                <div className="line-container" />
-                            </>
+                            <BlogCard key={blog.id} blog={blog} toogleSelectedBlog={handleSelectedBlog} />
                         ))
                     }
                 </div>

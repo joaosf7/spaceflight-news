@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react"
 import ReportView from './ReportView'
 import ReportCard from './ReportCard'
-import upArrow from '../../assets/images/upArrow.png'
-import downArrow from '../../assets/images/downArrow.png'
 import './Report.css'
 import ErrorPage from '../../ErrorPage'
 import Loading from "../Loading"
@@ -96,10 +94,12 @@ function Report(){
                     />
                 </form>
                 <div className="arrow-box">
-                    <img className="up-down-arrow" src={upArrow} alt='up arrow'
+                    <i
+                        className="fa-solid fa-circle-arrow-up up-down-arrow"
                         onClick={sortByRecent}
                     />
-                    <img className="up-down-arrow" src={downArrow} alt='down arrow'
+                    <i
+                        className="fa-solid fa-circle-arrow-down up-down-arrow"
                         onClick={sortByOlder}
                     />
                 </div>
@@ -115,10 +115,7 @@ function Report(){
                 <div className="card-list">
                     {
                         reports.results?.map(report => (
-                            <>
-                                <ReportCard key={report.id} report={report} toogleSelectedReport={handleSelectedReport} />
-                                <div className="line-container" />
-                            </>
+                            <ReportCard key={report.id} report={report} toogleSelectedReport={handleSelectedReport} />
                         ))
                     }
                 </div>
