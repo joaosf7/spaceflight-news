@@ -2,8 +2,6 @@ import { useState, useEffect } from "react"
 import NewsCard from './NewsCard'
 import ArticleView from './ArticleView'
 import './News.css'
-import leftArrow from '../../assets/images/leftArrow.png'
-import rightArrow from '../../assets/images/rightArrow.png'
 import upArrow from '../../assets/images/upArrow.png'
 import downArrow from '../../assets/images/downArrow.png'
 import ErrorPage from '../../ErrorPage'
@@ -21,6 +19,7 @@ function News() {
 
     function fetchArticle(url){
         setLoading(true)
+        setSelectedArticle(null)
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -107,25 +106,19 @@ function News() {
             <h1 id="news-title">Latest Spaceflight news</h1>
             <div id='main-frame'>
             {articles.previous ?
-                <img className='arrow-image' src={leftArrow} alt="left arrow" 
-                    onClick={getPreviousArticleList}/>
+                    <i className="fa-solid fa-circle-left arrow-image" onClick={getPreviousArticleList}></i>
                 :
                 <img className="arrow-image-dummy" src={leftArrowDummy} alt="left arrow dummy" />
             }
                 <div className="card-list">
                     {
-                        articles.results?.map((article, idx) => (
-                            <>  
+                        articles.results?.map((article) => (
                                 <NewsCard key={article.id} article={article} toogleSelectedArticle={handleSelectedArticle} />
-                                <div className="line-container"/>
-                            </>
                         ))    
                     }
                 </div>
                 {articles.next ?
-                    <img className='arrow-image' src={rightArrow} alt="right arrow" 
-                        onClick={getNextArticleList}
-                    />
+                    <i className="fa-solid fa-circle-right arrow-image" onClick={getNextArticleList}></i>
                     :
                     <img className="arrow-image-dummy" src={rightArrowDummy} alt="right arrow dummy" />
                 }

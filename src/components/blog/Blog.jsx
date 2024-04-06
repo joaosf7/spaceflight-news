@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react"
 import BlogView from './BlogView'
 import BlogCard from './BlogCard'
-import leftArrow from '../../assets/images/leftArrow.png'
-import rightArrow from '../../assets/images/rightArrow.png'
 import upArrow from '../../assets/images/upArrow.png'
 import downArrow from '../../assets/images/downArrow.png'
 import './Blog.css'
@@ -110,10 +108,9 @@ function Blog(){
             <h1 id="blog-title">Spiciest space stories!</h1>
             <div id='main-frame'>
                 {blogs.previous ? 
-                    <img className='arrow-image' src={leftArrow} alt="left arrow" 
-                        onClick={getPreviousBlogList}/>
-                        :
-                <img className="arrow-image-dummy" src={leftArrowDummy} alt="left arrow dummy" />
+                    <i className="fa-solid fa-circle-left arrow-image" onClick={getNextBlogList}></i>
+                    :
+                    <img className="arrow-image-dummy" src={leftArrowDummy} alt="left arrow dummy" />
                 }
                 <div className="card-list">
                     {
@@ -126,9 +123,7 @@ function Blog(){
                     }
                 </div>
                 {blogs.next ?
-                    <img className='arrow-image' src={rightArrow} alt="right arrow" 
-                        onClick={getNextBlogList}
-                    />
+                    <i className="fa-solid fa-circle-right arrow-image" onClick={getNextBlogList}></i>
                     :
                     <img className="arrow-image-dummy" src={rightArrowDummy} alt="right arrow dummy" />
                 }

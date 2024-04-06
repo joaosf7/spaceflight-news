@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react"
 import ReportView from './ReportView'
 import ReportCard from './ReportCard'
-import leftArrow from '../../assets/images/leftArrow.png'
-import rightArrow from '../../assets/images/rightArrow.png'
 import upArrow from '../../assets/images/upArrow.png'
 import downArrow from '../../assets/images/downArrow.png'
 import './Report.css'
@@ -107,12 +105,10 @@ function Report(){
                 </div>
             </div>
             {selectedReport && <ReportView report={selectedReport} />}
-            <div className="line-container" />
             <h1 id="report-title">Daily Reports</h1>
             <div id='main-frame'>
             {reports.previous ?
-                <img className='arrow-image' src={leftArrow} alt="left arrow" 
-                    onClick={getPreviousReportList}/>
+                <i className="fa-solid fa-circle-left arrow-image" onClick={getNextReportList}></i>
                 :
                 <img className="arrow-image-dummy" src={leftArrowDummy} alt="left arrow dummy" />
             }
@@ -127,9 +123,7 @@ function Report(){
                     }
                 </div>
                 {reports.next ?
-                    <img className='arrow-image' src={rightArrow} alt="right arrow" 
-                        onClick={getNextReportList}
-                    />
+                <i className="fa-solid fa-circle-right arrow-image" onClick={getNextReportList}></i>
                     :
                     <img className="arrow-image-dummy" src={rightArrowDummy} alt="right arrow dummy" />
                 }
