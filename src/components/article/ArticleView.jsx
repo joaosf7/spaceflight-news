@@ -1,23 +1,18 @@
 import './ArticleView.css'
+import { Link } from 'react-router-dom'
 
 function ArticleView({article}){
     return(
-        <a
-            id="article-view"
-            href={article.url}
-            target="_blank"
-            rel="noreferrer"
-            style={{ textDecoration: 'none', color: 'inherit' }}
-        >
+        <Link className='link article-view' to={article.url}>
             <div>
                 <h1 className='article-title'>{article.title}</h1>
                 <img className="article-view-image" src={article.image_url} alt="article" />
                 <p className='summary'>{article.summary}</p>
-                {article.launches && <p>{'Launches: ' + article.launches.length}</p>}
-                {article.launches?.map(launch => <p>{launch.id}</p>)}
-                <h4>Published at: {article.published_at.slice(0, 10)}</h4>
+                {article.launches && <p className='launch-title'>{'Launches: ' + article.launches.length}</p>}
+                {article.launches?.map(launch => <p className='launch-result'>{launch.id}</p>)}
+                <h4 className='published-at'>Published at: {article.published_at.slice(0, 10)}</h4>
             </div>
-        </a>
+        </Link>
     )
 }
 
