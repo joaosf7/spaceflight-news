@@ -1,11 +1,17 @@
 #news-card {
     display: flex;
-    flex-direction: column;
     justify-content: space-around;
     align-items:center;
-    max-width: 48%;
-    margin-bottom: 20px;
+    width: 90%;
+    margin-top: 20px;
     max-height: 35vh;
+}
+
+.card-info{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-between;
 }
 
 #news-card:hover {
@@ -15,15 +21,16 @@
 
 #news-card-image {
     margin-top: 10px;
-    max-width:30vw;
-    max-height: 19vh;
+    max-width:25vw;
+    max-height: 16vh;
+    width: 20em;
     border-radius: 5%;
 }
 
 .news-card-title {
     margin-top: 10px;
     height:max-content;
-    font-size:large;
+    font-size:150%;
     font-weight: 900;
     overflow: hidden;
 }
@@ -34,4 +41,6 @@
 
 .news-card-release {
     color: brown;
+    align-self: flex-end;
+    justify-self: flex-end;
 }

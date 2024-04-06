@@ -5,7 +5,7 @@ import './Footer.css'
 function Footer(){
     return (
         <footer>
-            <a href="https://github.com/joaosf7" target='_blank' rel='noreferrer'>
+            <a href="https://github.com/joaosf7/spaceflight-news" target='_blank' rel='noreferrer'>
                 <img className='social-media-image' src={githubLogo} alt='github logo'/>
             </a>
             <a href='https://linkedin.com/in/joao-flor' target='_blank' rel='noreferrer'>

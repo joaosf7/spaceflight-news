@@ -1,10 +1,12 @@
 #report-card {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     align-items:center;
-    max-width: 30vw;
+    min-width: 40vw;
     margin-bottom: 20px;
+    width: 100%;
+    scroll-snap-align: start;
+    flex: 0 0 auto;
 }
 
 #report-card:hover {
@@ -23,7 +25,7 @@
     height:fit-content;
     font-size:large;
     font-weight: 900;
-    width: 150px;
+    min-width: 150px;
 }
 
 .darkmode .report-card-title {
@@ -32,4 +34,14 @@
 
 .report-card-release {
     color: brown;
+    align-self: flex-end;
+}
+
+.card-info{
+    min-height: 100px;
+}
+
+.report-card-summary{
+    height: 25px;
+    overflow: hidden;
 }

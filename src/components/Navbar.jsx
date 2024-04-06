@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom'
 
 function Navbar(props) {
     return (
-      //   <img className='title-image' src={props.darkmode ? titleImage : darkmodeTitleImage} alt='title' />
       <header>
         <div className='navbar'>
           <Link className='link-box' to='/'>

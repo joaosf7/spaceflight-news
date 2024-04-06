@@ -107,6 +107,7 @@ function Report(){
                 </div>
             </div>
             {selectedReport && <ReportView report={selectedReport} />}
+            <div className="line-container" />
             <h1 id="report-title">Daily Reports</h1>
             <div id='main-frame'>
             {reports.previous ?
@@ -115,10 +116,13 @@ function Report(){
                 :
                 <img className="arrow-image-dummy" src={leftArrowDummy} alt="left arrow dummy" />
             }
-                <div id="card-list">
+                <div className="card-list">
                     {
                         reports.results?.map(report => (
-                            <ReportCard key={report.id} report={report} toogleSelectedReport={handleSelectedReport} />
+                            <>
+                                <ReportCard key={report.id} report={report} toogleSelectedReport={handleSelectedReport} />
+                                <div className="line-container" />
+                            </>
                         ))
                     }
                 </div>

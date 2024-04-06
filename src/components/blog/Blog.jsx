@@ -115,10 +115,13 @@ function Blog(){
                         :
                 <img className="arrow-image-dummy" src={leftArrowDummy} alt="left arrow dummy" />
                 }
-                <div id="card-list">
+                <div className="card-list">
                     {
                         blogs.results?.map(blog => (
-                            <BlogCard key={blog.id} blog={blog} toogleSelectedBlog={handleSelectedBlog} />
+                            <>
+                                <BlogCard key={blog.id} blog={blog} toogleSelectedBlog={handleSelectedBlog} />
+                                <div className="line-container" />
+                            </>
                         ))
                     }
                 </div>

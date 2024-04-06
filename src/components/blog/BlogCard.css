@@ -1,10 +1,19 @@
 #blog-card {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items:center;
-    max-width: 48%;
+    width: 90%;
     margin-bottom: 20px;
+    max-height: 35vh;
+    scroll-snap-align: start;
+}
+
+.card-info{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-between;
+    min-height: 100px;
 }
 
 #blog-card:hover {
@@ -14,16 +23,22 @@
 
 #blog-card-image {
     margin-top: 10px;
-    max-width:30vw;
-    max-height: 19vh;
+    margin-right: 20px;
+    max-width:25vw;
+    max-height: 16vh;
     border-radius: 5%;
 }
 
 .blog-card-title {
+    margin-top: 10px;
     height:max-content;
-    font-size:large;
+    font-size:150%;
     font-weight: 900;
     overflow: hidden;
+}
+
+.darkmode .news-card-title {
+    color:#fafab7
 }
 
 .darkmode .blog-card-title {
@@ -32,4 +47,6 @@
 
 .blog-card-release {
     color: brown;
+    align-self: flex-end;
+    justify-self: flex-end;
 }

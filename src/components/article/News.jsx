@@ -21,7 +21,6 @@ function News() {
 
     function fetchArticle(url){
         setLoading(true)
-        setSelectedArticle(null)
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -113,10 +112,13 @@ function News() {
                 :
                 <img className="arrow-image-dummy" src={leftArrowDummy} alt="left arrow dummy" />
             }
-                <div id="card-list">
+                <div className="card-list">
                     {
-                        articles.results?.map(article => (
-                            <NewsCard key={article.id} article={article} toogleSelectedArticle={handleSelectedArticle} />
+                        articles.results?.map((article, idx) => (
+                            <>  
+                                <NewsCard key={article.id} article={article} toogleSelectedArticle={handleSelectedArticle} />
+                                <div className="line-container"/>
+                            </>
                         ))    
                     }
                 </div>
