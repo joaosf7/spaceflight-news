@@ -6,7 +6,7 @@ function ErrorPage({error}){
         <div id="error-page">
             <h1>Oops!</h1>
             <p>It seems something went wrong.</p>
-            <h4>App wizards info: </h4>
+            <h4>App wizards' thoughts: </h4>
             <div className="error-message">{error}</div>
             <br/>
             <p>Here are some helpful links:</p>
