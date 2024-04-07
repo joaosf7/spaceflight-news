@@ -1,44 +1,44 @@
 import { useState, useEffect } from "react"
-import Card from '../Card'
-import View from '../View'
-import './News.css'
-import ErrorPage from '../ErrorPage'
-import Loading from '../Loading'
-import leftArrowDummy from '../../assets/images/leftArrowDummy.png'
-import rightArrowDummy from '../../assets/images/rightArrowDummy.png'
+import Card from './Card'
+import View from './View'
+import './MainPage.css'
+import ErrorPage from './ErrorPage'
+import Loading from './Loading'
+import leftArrowDummy from '../assets/images/leftArrowDummy.png'
+import rightArrowDummy from '..//assets/images/rightArrowDummy.png'
 
-function News() {
+function MainPage({apiUrl}) {
     const SAMPLE_INPUT = 'Search...'
-    const [articles, setArticles] = useState([])
+    const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState(SAMPLE_INPUT)
-    const [selectedArticle, setSelectedArticle] = useState()
+    const [selectedData, setSelectedData] = useState()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
 
-    function fetchArticle(url){
+    function fetchData(url){
         setLoading(true)
-        setSelectedArticle(null)
+        setSelectedData(null)
         fetch(url)
             .then(res => res.json())
             .then(data => {
                 setLoading(false)
-                setArticles(data)
+                setData(data)
             })
             .catch(error => setError(error.message))
     }
 
     useEffect(() => {
-        if(articles.length === 0){
-            fetchArticle("https://api.spaceflightnewsapi.net/v4/articles")
+        if(data.length === 0){
+            fetchData(apiUrl)
         }
     },[])
 
-    const getNextArticleList = () => {
-        fetchArticle(articles.next)
+    const getNextDataList = () => {
+        fetchData(data.next)
     }
 
-    const getPreviousArticleList = () => {
-        fetchArticle(articles.previous)
+    const getPreviousDataList = () => {
+        fetchData(data.previous)
     }
 
     const handleSearchInput = (event) => {
@@ -47,27 +47,27 @@ function News() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        fetchArticle("https://api.spaceflightnewsapi.net/v4/articles?search=" + searchTerm)
+        fetchData(apiUrl + "?search=" + searchTerm)
     }
 
     const sortByRecent = () => {
-        fetchArticle("https://api.spaceflightnewsapi.net/v4/articles" + (searchTerm !== SAMPLE_INPUT ? "?search=" + searchTerm : ''))
+        fetchData(apiUrl + (searchTerm !== SAMPLE_INPUT ? "?search=" + searchTerm : ''))
     }
 
     const sortByOlder = () => {
-        fetchArticle("https://api.spaceflightnewsapi.net/v4/articles" + '?ordering=published_at' + (searchTerm && searchTerm !== SAMPLE_INPUT ? "&search=" + searchTerm : ''))
+        fetchData(apiUrl + '?ordering=published_at' + (searchTerm && searchTerm !== SAMPLE_INPUT ? "&search=" + searchTerm : ''))
     }
 
-    const handleSelectedArticle = (id) => {
+    const handleSelectedData = (id) => {
         setLoading(true)
-        fetch("https://api.spaceflightnewsapi.net/v4/articles/" + id)
+        fetch(apiUrl + '/' + id)
             .then(res => res.json())
             .then(data => {
                 window.scrollTo({
                     top: 0,
                     behavior: 'smooth'
                 });
-                setSelectedArticle(data)
+                setSelectedData(data)
                 setLoading(false)
             })
             .catch(error => setError(error.message))
@@ -91,7 +91,7 @@ function News() {
                         onClick={() => setSearchTerm('')}
                     />
                     <i
-                        class="fa-solid fa-square submit-button"
+                        className="fa-solid fa-square submit-button"
                         onClick={handleSubmit}
                     />
                 </form>
@@ -106,23 +106,40 @@ function News() {
                     ></i>
                 </div>
             </div>
-            {selectedArticle && <View key={selectedArticle.id} data={selectedArticle} />}
-            <h1 id="news-title">Latest Spaceflight news</h1>
+            {selectedData && <View key={selectedData.id} data={selectedData} />}
+            {
+                    function(){
+                        const currentComponent = apiUrl.slice(apiUrl.lastIndexOf('/') + 1, apiUrl.length)
+
+                        switch (currentComponent) {
+                            case 'articles':
+                                return <h1 id="news-title">Latest Spaceflight news</h1>
+                                break;
+                            case 'blogs':
+                                return <h1 id="news-title">Spiciest Space Stories!</h1>
+                                break;
+                            default:
+                                return <h1 id="news-title">Daily reports!</h1>
+                                break;
+                        }
+                    }()
+                
+            }
             <div id='main-frame'>
-            {articles.previous ?
-                    <i className="fa-solid fa-circle-left arrow-image" onClick={getPreviousArticleList}></i>
+            {data.previous ?
+                    <i className="fa-solid fa-circle-left arrow-image" onClick={getPreviousDataList}></i>
                 :
                 <img className="arrow-image-dummy" src={leftArrowDummy} alt="left arrow dummy" />
             }
                 <div className="card-list">
                     {
-                        articles.results?.map((article) => (
-                                <Card key={article.id} data={article} toogleSelected={handleSelectedArticle} />
+                        data.results?.map((data) => (
+                                <Card key={data.id} data={data} toogleSelected={handleSelectedData} />
                         ))    
                     }
                 </div>
-                {articles.next ?
-                    <i className="fa-solid fa-circle-right arrow-image" onClick={getNextArticleList}></i>
+                {data.next ?
+                    <i className="fa-solid fa-circle-right arrow-image" onClick={getNextDataList}></i>
                     :
                     <img className="arrow-image-dummy" src={rightArrowDummy} alt="right arrow dummy" />
                 }
@@ -131,4 +148,4 @@ function News() {
     )
 }
 
-export default News
+export default MainPage
