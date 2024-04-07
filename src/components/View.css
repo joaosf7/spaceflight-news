@@ -1,0 +1,49 @@
+
+.view-launch-title{
+    color: red;
+}
+
+.view-published-at{
+    color:#440D4D;
+}
+.darkmode .view-published-at{
+    color: #d8ff3a;
+}
+
+.view-summary {
+    color: #440D4D;
+    font-size: 180%;
+    font-weight: 800;
+}
+.darkmode .view-summary {
+    color:#fafab7;
+}
+
+.view {
+    max-width: 80vw;
+    color: 'inherit';
+    text-decoration: 'none';
+}
+
+.view-image {
+    max-height: 45vh;
+    max-width: 45vw;
+    border-radius: 5%;
+}
+
+.view-title{
+    color:#110EA7;
+    font-size: 240%;
+    font-weight: 700;
+}
+
+
+.darkmode .view-title {
+    color: #9E1818;
+}
+
+@media screen and (min-width:1000px){
+    .view-summary{
+        font-size: 120%;
+    }
+}

@@ -83,6 +83,7 @@ function MainPage({apiUrl}) {
         <div id='main'>
             <div className="order-filter-box">
                 <form
+                    className="search-form"
                     onSubmit={handleSubmit}>
                     <input
                         id="input-box"
