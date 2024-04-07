@@ -9,13 +9,13 @@
   align-items: center;
   justify-content:space-between;
   text-align: center;
-  background-color: #EAECD3;
+  background: linear-gradient(to bottom right, #EAECD3, #ffe2e2);
   color: #440D4D;
   min-height: 100vh;
 }
 
 .darkmode {
-  background-color: #161336;
+  background: linear-gradient(to bottom right, #161336, #210000);
   color: #D7EE4B;
 }
 
