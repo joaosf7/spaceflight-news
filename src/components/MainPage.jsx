@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import Card from './Card'
 import View from './View'
 import './MainPage.css'
@@ -14,8 +14,6 @@ function MainPage({apiUrl}) {
     const [selectedData, setSelectedData] = useState()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
-    const upArrow = useRef(null)
-    const downArrow = useRef(null)
 
     function fetchData(url){
         setLoading(true)
@@ -53,13 +51,10 @@ function MainPage({apiUrl}) {
     }
 
     const sortByRecent = () => {
-        upArrow.current.setAttribute('data-fa-transform', 'grow-6')
-        console.log(upArrow)
         fetchData(apiUrl + (searchTerm !== SAMPLE_INPUT ? "?search=" + searchTerm : ''))
     }
 
     const sortByOlder = () => {
-        downArrow.current.setAttribute('data-fa-transform', 'grow-6')
         fetchData(apiUrl + '?ordering=published_at' + (searchTerm && searchTerm !== SAMPLE_INPUT ? "&search=" + searchTerm : ''))
     }
 
@@ -104,12 +99,10 @@ function MainPage({apiUrl}) {
                 <div className="arrow-box">
                     <i
                         className="fa-solid fa-circle-arrow-up up-down-arrow"
-                        ref={upArrow}
                         onClick={sortByRecent}
                     ></i>
                     <i
                         className="fa-solid fa-circle-arrow-down up-down-arrow"
-                        ref={downArrow}
                         onClick={sortByOlder}
                     ></i>
                 </div>
