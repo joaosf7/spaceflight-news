@@ -1,7 +1,9 @@
 header{
     display: flex;
+    align-items: center;
     flex-direction: column;
 }
+
 .navbar{
     margin: 0;
     padding: 0;
@@ -9,7 +11,7 @@ header{
     justify-content: space-between;
     align-items: center;
     max-width: 70vw;
-    width: 100vw;
+    width: 100%;
     flex-wrap: nowrap;
     margin-bottom: 10px;
 }
@@ -68,7 +70,6 @@ header{
 }
 
 #darkmode-switch{
-    margin-left: 20px;
     max-height: 100px;
 }
 

@@ -63,10 +63,6 @@ function MainPage({apiUrl}) {
         fetch(apiUrl + '/' + id)
             .then(res => res.json())
             .then(data => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
                 setSelectedData(data)
                 setLoading(false)
             })
@@ -82,9 +78,7 @@ function MainPage({apiUrl}) {
     return(
         <div id='main'>
             <div className="order-filter-box">
-                <form
-                    className="search-form"
-                    onSubmit={handleSubmit}>
+                <form className="search-form" onSubmit={handleSubmit}>
                     <input
                         id="input-box"
                         value={searchTerm}
@@ -108,30 +102,28 @@ function MainPage({apiUrl}) {
                 </div>
             </div>
             {selectedData && <View key={selectedData.id} data={selectedData} />}
+           
             {
-                    function(){
-                        const currentComponent = apiUrl.slice(apiUrl.lastIndexOf('/') + 1, apiUrl.length)
+                function(){
+                    const currentComponent = apiUrl.slice(apiUrl.lastIndexOf('/') + 1, apiUrl.length)
 
-                        switch (currentComponent) {
-                            case 'articles':
-                                return <h1 id="news-title">Latest Spaceflight news</h1>
-                                break;
-                            case 'blogs':
-                                return <h1 id="news-title">Spiciest Space Stories!</h1>
-                                break;
-                            default:
-                                return <h1 id="news-title">Daily reports!</h1>
-                                break;
-                        }
-                    }()
-                
+                    switch (currentComponent) {
+                        case 'articles':
+                            return <h1 id="news-title">Latest Spaceflight news</h1>
+                        case 'blogs':
+                            return <h1 id="news-title">Spiciest Space Stories!</h1>
+                        default:
+                            return <h1 id="news-title">Daily reports!</h1>
+                    }
+                }()
             }
+             <div className="line-break" />
             <div id='main-frame'>
-            {data.previous ?
+                {data.previous ?
                     <i className="fa-solid fa-circle-left arrow-image" onClick={getPreviousDataList}></i>
-                :
-                <img className="arrow-image-dummy" src={leftArrowDummy} alt="left arrow dummy" />
-            }
+                    :
+                    <img className="arrow-image-dummy" src={leftArrowDummy} alt="left arrow dummy" />
+                }
                 <div className="card-list">
                     {
                         data.results?.map((data) => (
