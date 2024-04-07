@@ -17,7 +17,7 @@ function App() {
   return (
       <BrowserRouter>
         <div className={darkmode ? 'App darkmode' : 'App'}>
-          <Navbar darkmode={darkmode} toogleDarkmode={handleDarkmode}/>
+          <Navbar darkmode={darkmode} toggleDarkmode={handleDarkmode}/>
           <Routes>
             <Route exact path='/' element={<MainPage key='news' apiUrl='https://api.spaceflightnewsapi.net/v4/articles'/> } errorElement={<ErrorPage />}/>
             <Route path='/news' element={<MainPage key='news' apiUrl='https://api.spaceflightnewsapi.net/v4/articles'/>} />

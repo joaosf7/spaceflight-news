@@ -15,7 +15,7 @@ function Navbar(props) {
             id='darkmode-switch'
             src={darkmodeSwitch}
             alt='darkmode switch'
-            onClick={props.toogleDarkmode}
+            onClick={props.toggleDarkmode}
           />
         </div>
           <div className="navbar-links">
