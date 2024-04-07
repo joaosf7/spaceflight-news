@@ -53,7 +53,6 @@ function MainPage({apiUrl}) {
     }
 
     const sortByRecent = () => {
-        // Handle button zoom here
         upArrow.current.setAttribute('data-fa-transform', 'grow-6')
         console.log(upArrow)
         fetchData(apiUrl + (searchTerm !== SAMPLE_INPUT ? "?search=" + searchTerm : ''))
