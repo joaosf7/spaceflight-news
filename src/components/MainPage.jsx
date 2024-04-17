@@ -7,7 +7,9 @@ import Loading from './Loading'
 import leftArrowDummy from '../assets/images/leftArrowDummy.png'
 import rightArrowDummy from '..//assets/images/rightArrowDummy.png'
 
-function MainPage({apiUrl}) {
+const apiUrl = 'https://api.spaceflightnewsapi.net/v4'
+
+function MainPage({type}) {
     const SAMPLE_INPUT = 'Search...'
     const [data, setData] = useState([])
     const [searchTerm, setSearchTerm] = useState(SAMPLE_INPUT)
@@ -29,7 +31,7 @@ function MainPage({apiUrl}) {
 
     useEffect(() => {
         if(data.length === 0){
-            fetchData(apiUrl)
+            fetchData(apiUrl + '/' + type)
         }
     },[])
 
@@ -47,20 +49,20 @@ function MainPage({apiUrl}) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        fetchData(apiUrl + "?search=" + searchTerm)
+        fetchData(apiUrl + '/' + type + "?search=" + searchTerm)
     }
 
     const sortByRecent = () => {
-        fetchData(apiUrl + (searchTerm !== SAMPLE_INPUT ? "?search=" + searchTerm : ''))
+        fetchData(apiUrl + '/' + type + (searchTerm !== SAMPLE_INPUT ? "?search=" + searchTerm : ''))
     }
 
     const sortByOlder = () => {
-        fetchData(apiUrl + '?ordering=published_at' + (searchTerm && searchTerm !== SAMPLE_INPUT ? "&search=" + searchTerm : ''))
+        fetchData(apiUrl + '/' + type + '?ordering=published_at' + (searchTerm && searchTerm !== SAMPLE_INPUT ? "&search=" + searchTerm : ''))
     }
 
     const handleSelectedData = (id) => {
         setLoading(true)
-        fetch(apiUrl + '/' + id)
+        fetch(`${apiUrl}/${type}/${id}`)
             .then(res => res.json())
             .then(data => {
                 setSelectedData(data)
@@ -127,7 +129,7 @@ function MainPage({apiUrl}) {
                 <div className="card-list">
                     {
                         data.results?.map((data) => (
-                                <Card key={data.id} data={data} toogleSelected={handleSelectedData} />
+                                <Card key={data.id} data={data} toggleSelected={handleSelectedData} />
                         ))    
                     }
                 </div>

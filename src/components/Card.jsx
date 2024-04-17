@@ -1,13 +1,13 @@
 import './Card.css'
 
-function Card(props){
+function Card({data, toggleSelected}){
     return(
-        <div className="card" onClick={() => props.toogleSelected(props.data.id)}>
-            <img className="card-image" src={props.data.image_url} alt="report"/>
+        <div className="card" onClick={() => toggleSelected(data.id)}>
+            <img className="card-image" src={data.image_url} alt="report"/>
             <div className='card-info'>
-                <h5 className='card-title'>{props.data.title}</h5>
-                <p className='card-summary'>{props.data.summary}</p>
-                <p className='card-release'>{props.data.published_at.slice(0,10)}</p>
+                <h5 className='card-title'>{data.title}</h5>
+                <p className='card-summary'>{data.summary}</p>
+                <p className='card-release'>{data.published_at.slice(0,10)}</p>
             </div>
         </div>
     )

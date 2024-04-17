@@ -19,10 +19,10 @@ function App() {
         <div className={darkmode ? 'App darkmode' : 'App'}>
           <Navbar darkmode={darkmode} toggleDarkmode={handleDarkmode}/>
           <Routes>
-            <Route exact path='/' element={<MainPage key='news' apiUrl='https://api.spaceflightnewsapi.net/v4/articles'/> } errorElement={<ErrorPage />}/>
-            <Route path='/news' element={<MainPage key='news' apiUrl='https://api.spaceflightnewsapi.net/v4/articles'/>} />
-            <Route path='/blogs' element={<MainPage key='blogs' apiUrl='https://api.spaceflightnewsapi.net/v4/blogs'/>} />
-            <Route path='/reports' element={<MainPage key='reports' apiUrl='https://api.spaceflightnewsapi.net/v4/reports'/>} />
+            <Route exact path='/' element={<MainPage key='news' type='articles'/> } errorElement={<ErrorPage />}/>
+            <Route path='/news' element={<MainPage key='news' type='articles'/>} />
+            <Route path='/blogs' element={<MainPage key='blogs' type='blogs'/>} />
+            <Route path='/reports' element={<MainPage key='reports' type='reports'/>} />
             <Route path='/*' element={<ErrorPage error={'No such endpoint: ' + window.location}/>} />
           </Routes>
           <Footer />
